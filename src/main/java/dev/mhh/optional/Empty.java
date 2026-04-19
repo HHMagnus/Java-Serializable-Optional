@@ -66,7 +66,9 @@ public record Empty<T>() implements Optional<T>, Serializable {
     @Override
     public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
         Objects.requireNonNull(supplier);
-        return this;
+        @SuppressWarnings("unchecked")
+        Optional<T> r = (Optional<T>) supplier.get();
+        return Objects.requireNonNull(r);
     }
 
     @Override

@@ -52,12 +52,10 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
      */
     boolean isPresent();
 
-
     /**
      * @see java.util.Optional#isEmpty()
      */
     boolean isEmpty();
-
 
     /**
      * @see java.util.Optional#ifPresent(Consumer)
@@ -68,7 +66,6 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
      * @see java.util.Optional#ifPresentOrElse(Consumer, Runnable)
      */
      void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction);
-
 
     /**
      * @see java.util.Optional#filter(Predicate)
@@ -100,7 +97,6 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
      */
     T orElse(T other);
 
-
     /**
      * @see java.util.Optional#orElseGet(Supplier)
      */
@@ -110,7 +106,6 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
      * @see java.util.Optional#orElseThrow()
      */
     T orElseThrow();
-
 
     /**
      * @see java.util.Optional#orElseThrow(Supplier)

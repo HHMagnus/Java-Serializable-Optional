@@ -62,9 +62,7 @@ public record Present<T>(T value) implements Optional<T>, Serializable {
     @Override
     public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
         Objects.requireNonNull(supplier);
-        @SuppressWarnings("unchecked")
-        Optional<T> r = (Optional<T>) supplier.get();
-        return Objects.requireNonNull(r);
+        return this;
     }
 
     @Override
