@@ -18,7 +18,7 @@ public record Empty<T>() implements Optional<T>, Serializable {
     /**
      * Common instance for {@code empty()}.
      */
-    static final Optional<?> EMPTY = new dev.mhh.optional.Empty<>();
+    static final Optional<?> EMPTY = new Empty<>();
 
     @Override
     public T get() {
@@ -42,24 +42,22 @@ public record Empty<T>() implements Optional<T>, Serializable {
 
     @Override
     public void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction) {
+        Objects.requireNonNull(emptyAction);
         emptyAction.run();
     }
 
     @Override
     public Optional<T> filter(Predicate<? super T> predicate) {
-        Objects.requireNonNull(predicate);
         return this;
     }
 
     @Override
     public <U> Optional<U> map(Function<? super T, ? extends U> mapper) {
-        Objects.requireNonNull(mapper);
         return Optional.empty();
     }
 
     @Override
     public <U> Optional<U> flatMap(Function<? super T, ? extends Optional<? extends U>> mapper) {
-        Objects.requireNonNull(mapper);
         return Optional.empty();
     }
 
@@ -93,6 +91,7 @@ public record Empty<T>() implements Optional<T>, Serializable {
 
     @Override
     public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X {
+        Objects.requireNonNull(exceptionSupplier);
         throw exceptionSupplier.get();
     }
 }

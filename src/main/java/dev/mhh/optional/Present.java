@@ -9,6 +9,10 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public record Present<T>(T value) implements Optional<T>, Serializable {
+    public Present {
+        Objects.requireNonNull(value);
+    }
+
     @Override
     public T get() {
         return value;
@@ -31,11 +35,13 @@ public record Present<T>(T value) implements Optional<T>, Serializable {
 
     @Override
     public void ifPresent(Consumer<? super T> action) {
+        Objects.requireNonNull(action);
         action.accept(value);
     }
 
     @Override
     public void ifPresentOrElse(Consumer<? super T> action, Runnable emptyAction) {
+        Objects.requireNonNull(action);
         action.accept(value);
     }
 
@@ -61,7 +67,6 @@ public record Present<T>(T value) implements Optional<T>, Serializable {
 
     @Override
     public Optional<T> or(Supplier<? extends Optional<? extends T>> supplier) {
-        Objects.requireNonNull(supplier);
         return this;
     }
 
