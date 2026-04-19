@@ -20,4 +20,4 @@ System.out.println(message);
 
 This implementation validates all used argument functions before they are used. This differs from the JDK's `Optional<T>` for `flatMap`, `map`, `filter` and `or` where they will throw an exception if the function is null either way.
 
-Since `Empty` and `Present` are `record`s they can be manually constructed. This is not recommended for common use.
+Manual construction of `Empty` and `Present` is **not** recommended.
