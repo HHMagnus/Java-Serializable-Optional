@@ -30,7 +30,7 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
      * @see java.util.Optional#of(T)
      */
     static <T> Optional<T> of(T value) {
-        return new Present<>(Objects.requireNonNull(value));
+        return new Present<>(value);
     }
 
     /**
