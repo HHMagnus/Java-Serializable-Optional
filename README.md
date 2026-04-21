@@ -39,4 +39,4 @@ These are their results:
 - [Long run performance benchmark](benchmark_long_run_2026_04_21.txt)
 - [Short run performance benchmark](benchmark_short_run_2026_04_21.txt)
 
-Each of these runs shows this implementation as faster on some operations and the JDK's as faster on others. However, this is inconsistent across runs. Therefore, I concluded that there is no noticeable performance difference between this implementation and the JDK's. Additionally, the difference is in nanoseconds, which projects worth writing in *Java* would not notice.
+Each of these runs shows this implementation as faster on some operations and the JDK's as faster on others. However, this is inconsistent across runs. Therefore, I concluded that there is no noticeable performance difference between this implementation and the JDK's. Additionally, the difference is in nanoseconds, which projects considering serializability would not care about.
