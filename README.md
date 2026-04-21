@@ -11,6 +11,7 @@ final var message = switch (optional) {
 ```
 
 Or use an early deconstruction (JDK 21+):
+
 ```java
 if (!(optional instanceof Present(var message))) {
     return;
@@ -18,7 +19,7 @@ if (!(optional instanceof Present(var message))) {
 System.out.println(message);
 ```
 
-This implementation validates all used argument functions before they are used. This differs from the JDK's `Optional<T>` for `flatMap`, `map`, `filter` and `or` where they will throw an exception if the function is null either way.
+This implementation validates all argument functions before they are used. This differs from the JDK's `Optional<T>` for `flatMap`, `map`, `filter`, and `or`, where they will throw an exception if the function is null.
 
 Manual construction of `Empty` and `Present` is **not** recommended.
 
