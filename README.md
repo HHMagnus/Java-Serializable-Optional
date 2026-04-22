@@ -23,6 +23,13 @@ This implementation validates all argument functions before they are used. This 
 
 Manual construction of `Empty` and `Present` is **not** recommended.
 
+## Usage
+
+Import into a gradle project using:
+```groovy
+implementation 'dev.mhh:optional:1.0.3'
+```
+
 ## Performance
 
 TL;DR: There is no noticeable performance difference between this implementation and the JDK's.
