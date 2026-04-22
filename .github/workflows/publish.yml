@@ -36,4 +36,4 @@ jobs:
           GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           VERSION: ${{ github.event.release.tag_name }}
-        run: ./gradlew publishMavenJavaPublicationToMavenCentralRepository
+        run: ./gradlew publishAggregationToCentralPortal
