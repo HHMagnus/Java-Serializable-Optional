@@ -27,14 +27,14 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
     }
 
     /**
-     * @see java.util.Optional#of(T)
+     * @see java.util.Optional#of(Object)
      */
     static <T> Optional<T> of(T value) {
         return new Present<>(value);
     }
 
     /**
-     * @see java.util.Optional#ofNullable(T)
+     * @see java.util.Optional#ofNullable(Object)
      */
     @SuppressWarnings("unchecked")
     static <T> Optional<T> ofNullable(T value) {
@@ -93,7 +93,7 @@ public sealed interface Optional<T> extends Serializable permits Empty, Present 
     Stream<T> stream();
 
     /**
-     * @see java.util.Optional#orElse(T)
+     * @see java.util.Optional#orElse(Object)
      */
     T orElse(T other);
 
