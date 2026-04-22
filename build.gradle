@@ -2,10 +2,11 @@ plugins {
     id 'java'
     id "me.champeau.jmh" version "0.7.3"
     id 'maven-publish'
+    id 'signing'
 }
 
 group = 'dev.mhh'
-version = '1.0-SNAPSHOT'
+version = (System.getenv("VERSION") ?: "0.0.1-SNAPSHOT").replaceAll(/^v/, "")
 
 repositories {
     mavenCentral()
@@ -21,14 +22,44 @@ test {
     useJUnitPlatform()
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 publishing {
     publications {
-        gpr(MavenPublication) {
+        mavenJava(MavenPublication) {
             from(components.java)
 
             groupId = 'dev.mhh'
             artifactId = 'optional'
-            version = (System.getenv("VERSION") ?: "0.0.1-SNAPSHOT").replaceAll(/^v/, "")
+            version = project.version
+
+            pom {
+                name = 'Java Serializable Optional'
+                description = 'A Serializable Optional type for Java'
+                url = 'https://github.com/HHMagnus/Java-Serializable-Optional'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'HHMagnus'
+                        name = 'Magnus Hindborg Hovmann'
+                        email = 'magnus@mhh.dev'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/HHMagnus/Java-Serializable-Optional.git'
+                    developerConnection = 'scm:git:ssh://github.com/HHMagnus/Java-Serializable-Optional.git'
+                    url = 'https://github.com/HHMagnus/Java-Serializable-Optional'
+                }
+            }
         }
     }
 
@@ -41,5 +72,25 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
+
+        maven {
+            name = "MavenCentral"
+            def releasesUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            def snapshotsUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            url = version.endsWith("SNAPSHOT") ? snapshotsUrl : releasesUrl
+
+            credentials {
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_PASSWORD")
+            }
+        }
     }
+}
+
+signing {
+    required { !version.endsWith("SNAPSHOT") && System.getenv("GPG_SECRET_KEY") != null }
+    def signingKey = System.getenv("GPG_SECRET_KEY")
+    def signingPassphrase = System.getenv("GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKey, signingPassphrase)
+    sign publishing.publications.mavenJava
 }
